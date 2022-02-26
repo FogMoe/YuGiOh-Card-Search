@@ -9,14 +9,14 @@ class SearchCard:
     a = 7
 
     def __init__(self):         
-        requestCard = input("请输入要查询的卡片信息包含的关键字: ") 
+        requestCard = input("请输入要查询的卡片信息包含的关键字: ")  #接受输入
         #从(ourocg.cn)获得卡片数据初始化
         target = requests.get('https://www.ourocg.cn/search/'+urllib.parse.quote(requestCard)).text
         soup = BeautifulSoup(target, "html.parser")
         self.firstTarget = soup.find_all("script")[2].get_text()
         self.cardUrl = ""
 
-    def GetFirstCardDetails(self):
+    def GetFirstCard(self):
         #得到匹配的第一张卡片的数据
         strBegin = self.firstTarget.find(r"https:\/\/www.ourocg.cn\/card\/")
         if strBegin >100 :
@@ -26,11 +26,11 @@ class SearchCard:
                 pass
             self.cardUrl = "https://www.ourocg.cn/card/"+theValue
         else:
-            print("您请求的卡片不存在！")
+            print("您请求的卡片不存在！") #查询不到
 
     def GetTheCardDetails(self):
         #得到并输出这张卡片的具体信息
-        self.GetFirstCardDetails()
+        self.GetFirstCard()
         if self.cardUrl != "":
             target = requests.get(self.cardUrl).text
             soup = BeautifulSoup(target, "html.parser")
@@ -41,7 +41,7 @@ class SearchCard:
                 self.GetTheCardDetails()
             else:        
                 outputCard = cardDetails.replace('\n', '').replace('\r', '')
-                print(outputCard + "Please email to kc@fog.moe")  
+                print(outputCard + "Please email to kc@fog.moe")  #结果
 
 #执行
 useSearchCard = SearchCard()
