@@ -37,7 +37,7 @@ class SearchCard:
             try:
                 cardDetails =  soup.find("article").get_text()
             except:
-                self.a = random.choice([5,6])
+                self.a = random.choice([5,6,8,9])
                 self.GetTheCardDetails()
             else:        
                 outputCard = cardDetails.replace('\n', '').replace('\r', '')
