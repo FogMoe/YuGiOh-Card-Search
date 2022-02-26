@@ -9,7 +9,7 @@ class SearchCard:
     a = 7
 
     def __init__(self):         
-        requestCard = input("请输入要查询的卡包含的关键字: ") 
+        requestCard = input("请输入要查询的卡片信息包含的关键字: ") 
         #从(ourocg.cn)获得卡片数据初始化
         target = requests.get('https://www.ourocg.cn/search/'+urllib.parse.quote(requestCard)).text
         soup = BeautifulSoup(target, "html.parser")
